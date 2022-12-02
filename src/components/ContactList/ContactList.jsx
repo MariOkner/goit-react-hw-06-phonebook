@@ -1,8 +1,15 @@
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
+import { getFilter, getContacts } from 'redux/selectors';
 
 import { ListContact, ContactItem, ContactDelete } from './ContactList.styled';
 
-export const ContactList = ({ contacts, filter, onDelete }) => {
+export const ContactList = ({ filter, onDelete }) => {
+  const contacts = useSelector(getContacts);
+  const visibleContacts = contacts => {
+    return contacts;
+  };
+
   return (
     <ListContact>
       {contacts
