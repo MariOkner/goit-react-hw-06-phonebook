@@ -1,11 +1,11 @@
 import styled from '@emotion/styled';
 
-export const ListContact = styled.ul`
+export const ContactListHTML = styled.ul`
   display: inline-block;
   margin: 0 auto;
 `;
 
-export const ContactItem = styled.li`
+export const ContactItemHTML = styled.li`
   line-height: 1.5;
   height: 100%;
 
@@ -14,7 +14,7 @@ export const ContactItem = styled.li`
   }
 `;
 
-export const ContactDelete = styled.button`
+export const ContactDeleteHTML = styled.button`
   width: 120px;
   margin-left: 50px;
   padding: 5px;

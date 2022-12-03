@@ -1,41 +1,47 @@
-import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+// import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import { getFilter, getContacts } from 'redux/selectors';
+import { deleteContact } from 'redux/contactsSlice';
 
-import { ListContact, ContactItem, ContactDelete } from './ContactList.styled';
+import {
+  ContactListHTML,
+  ContactItemHTML,
+  ContactDeleteHTML,
+} from './ContactList.styled';
 
-export const ContactList = ({ filter, onDelete }) => {
+export const ContactList = () => {
   const contacts = useSelector(getContacts);
-  const visibleContacts = contacts => {
-    return contacts;
-  };
+  const filter = useSelector(getFilter);
+  const dispatch = useDispatch();
 
   return (
-    <ListContact>
+    <ContactListHTML>
       {contacts
         .filter(({ name }) => {
           return name.toLowerCase().includes(filter.toLowerCase());
         })
         .map(({ id, name, number }) => (
-          <ContactItem key={id}>
+          <ContactItemHTML key={id}>
             {name}: {number}
-            <ContactDelete id={id} onClick={() => onDelete(id)}>
+            <ContactDeleteHTML
+              id={id}
+              onClick={() => dispatch(deleteContact(id))}
+            >
               Delete
-            </ContactDelete>
-          </ContactItem>
+            </ContactDeleteHTML>
+          </ContactItemHTML>
         ))}
-    </ListContact>
+    </ContactListHTML>
   );
 };
 
-ContactList.propTypes = {
-  contacts: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      number: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-  filter: PropTypes.string.isRequired,
-  onDelete: PropTypes.func.isRequired,
-};
+// ContactList.propTypes = {
+//   contacts: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.string.isRequired,
+//       name: PropTypes.string.isRequired,
+//       number: PropTypes.string.isRequired,
+//     })
+//   ).isRequired,
+//   filter: PropTypes.string.isRequired,
+// };

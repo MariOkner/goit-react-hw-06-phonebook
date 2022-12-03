@@ -1,17 +1,33 @@
+import { toast } from 'react-toastify';
+
 import { createSlice, nanoid } from '@reduxjs/toolkit';
 
 export const contactsSlice = createSlice({
   name: 'contacts',
-  initialState: { items: [] },
+  initialState: [],
   reducers: {
     addContact: {
-      reducer: (state, { payload }) => {
-        state.items = [payload, ...state.items];
+      reducer: (state, action) => {
+        if (
+          state.some(contact => {
+            return (
+              contact.name.toLowerCase() === action.payload.name.toLowerCase()
+            );
+          })
+        ) {
+          toast.warn(`${action.payload.name} is already in contacts`);
+          return;
+        }
+
+        state.push(action.payload);
       },
-      prepare: contact => ({ payload: { id: nanoid(), ...contact } }),
+      prepare: payload => ({
+        payload: { id: nanoid(), name: payload.name, number: payload.number },
+      }),
     },
-    deleteContact: (state, { payload }) => {
-      state.items = state.items.filter(({ id }) => id !== payload);
+    deleteContact: (state, action) => {
+      const index = state.findIndex(contact => contact.id === action.payload);
+      state.splice(index, 1);
     },
   },
 });
