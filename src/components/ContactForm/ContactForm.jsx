@@ -1,6 +1,7 @@
 import { Formik } from 'formik';
 import * as yup from 'yup';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+
 import { useDispatch } from 'react-redux';
 import { addContact } from 'redux/contactsSlice';
 
@@ -67,9 +68,9 @@ export const ContactForm = () => {
   );
 };
 
-// ContactForm.propTypes = {
-//   initialValues: PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     number: PropTypes.string.isRequired,
-//   }),
-// };
+ContactForm.propTypes = {
+  initialValues: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }),
+};

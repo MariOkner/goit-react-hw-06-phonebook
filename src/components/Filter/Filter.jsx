@@ -2,8 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getFilter } from 'redux/selectors';
 import { setFilter } from 'redux/filterSlice';
 
-// import PropTypes from 'prop-types';
-
 import { FilterLabel, FilterInput } from './Filter.styled';
 
 export const Filter = () => {
@@ -22,8 +20,3 @@ export const Filter = () => {
     </FilterLabel>
   );
 };
-
-// Filter.propTypes = {
-//   value: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-// };
